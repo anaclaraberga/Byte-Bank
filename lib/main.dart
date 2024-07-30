@@ -22,9 +22,9 @@ class TransferList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransferItem(Transfer(100.00, 'Conta:9876')),
-        TransferItem(Transfer(70.00, 'Conta:2176')),
-        TransferItem(Transfer(165.00, 'Conta:0129')),
+        TransferItem(Transfer(100.00, 9876)),
+        TransferItem(Transfer(70.00, 1042)),
+        TransferItem(Transfer(165.00, 0854)),
       ],
     );
   }
@@ -41,14 +41,14 @@ class TransferItem extends StatelessWidget {
         child: ListTile(
       leading: Icon(Icons.monetization_on),
       title: Text(transfer.value.toString()),
-      subtitle: Text(transfer.accountNumber),
+      subtitle: Text('Conta: ${transfer.accountNumber.toString()}'),
     ));
   }
 }
 
 class Transfer {
   final double value;
-  final String accountNumber;
+  final int accountNumber;
 
   Transfer(this.value, this.accountNumber);
 }
