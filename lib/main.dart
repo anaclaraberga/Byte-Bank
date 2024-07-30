@@ -5,10 +5,10 @@ void main() {
     home: Scaffold(
       body: TransferList(),
       appBar: AppBar(
-        title: const Text('Transferências'),
+        title: Text('Transferências'),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         onPressed: () {
           return null;
         },
@@ -20,29 +20,35 @@ void main() {
 class TransferList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        TransferItem('100.00', 'Conta: 2944'),
-        TransferItem('50.00', 'Conta: 2964'),
-        TransferItem('160.00', 'Conta: 2454'),
+        TransferItem(Transfer(100.00, 'Conta:9876')),
+        TransferItem(Transfer(70.00, 'Conta:2176')),
+        TransferItem(Transfer(165.00, 'Conta:0129')),
       ],
     );
   }
 }
 
 class TransferItem extends StatelessWidget {
-  final String value;
-  final String accountNumber;
+  final Transfer transfer;
 
-  const TransferItem(this.value, this.accountNumber);
+  TransferItem(this.transfer);
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
       leading: Icon(Icons.monetization_on),
-      title: Text(value),
-      subtitle: Text(accountNumber),
+      title: Text(transfer.value.toString()),
+      subtitle: Text(transfer.accountNumber),
     ));
   }
+}
+
+class Transfer {
+  final double value;
+  final String accountNumber;
+
+  Transfer(this.value, this.accountNumber);
 }
