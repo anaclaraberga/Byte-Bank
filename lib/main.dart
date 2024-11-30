@@ -1,23 +1,48 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      body: TransferList(),
-      appBar: AppBar(
-        title: Text('Transferências'),
+void main() => runApp(ByteBankApp());
+
+class ByteBankApp extends StatelessWidget {
+  const ByteBankApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: TransferForm(),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          return null;
-        },
-      ),
-    ),
-  ));
+    );
+  }
+}
+
+class TransferForm extends StatelessWidget {
+  const TransferForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Transferências'),
+        ),
+        body: Column(
+          children: [
+            TransferItem(Transfer(100.00, 9876)),
+            TransferItem(Transfer(70.00, 1042)),
+            TransferItem(Transfer(165.00, 0854)),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            return;
+          },
+        ));
+  }
 }
 
 class TransferList extends StatelessWidget {
+  const TransferList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,13 +58,13 @@ class TransferList extends StatelessWidget {
 class TransferItem extends StatelessWidget {
   final Transfer transfer;
 
-  TransferItem(this.transfer);
+  const TransferItem(this.transfer, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Icon(Icons.monetization_on),
+      leading: const Icon(Icons.monetization_on),
       title: Text(transfer.value.toString()),
       subtitle: Text('Conta: ${transfer.accountNumber.toString()}'),
     ));
