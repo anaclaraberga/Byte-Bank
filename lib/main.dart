@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(ByteBankApp());
+void main() => runApp(const ByteBankApp());
 
 class ByteBankApp extends StatelessWidget {
   const ByteBankApp({super.key});
@@ -9,14 +9,51 @@ class ByteBankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: TransferForm(),
+        body: MakeTransfer(),
       ),
     );
   }
 }
 
-class TransferForm extends StatelessWidget {
-  const TransferForm({super.key});
+class MakeTransfer extends StatelessWidget {
+  const MakeTransfer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Realizar nova transferência'),
+        ),
+        body: const Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(24.0),
+              child: TextField(
+                style: TextStyle(fontSize: 16.0),
+                decoration: InputDecoration(
+                    labelText: 'Número da conta', hintText: '0000'),
+                keyboardType: TextInputType.numberWithOptions(),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(24.0),
+              child: TextField(
+                style: TextStyle(fontSize: 16.0),
+                decoration: InputDecoration(
+                    labelText: 'Valor da transferência',
+                    hintText: '0000',
+                    icon: Icon(Icons.monetization_on)),
+                keyboardType: TextInputType.numberWithOptions(),
+              ),
+            ),
+            ElevatedButton(onPressed: null, child: Text("Confirmar"))
+          ],
+        ));
+  }
+}
+
+class TransferDashboard extends StatelessWidget {
+  const TransferDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +61,7 @@ class TransferForm extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Transferências'),
         ),
-        body: Column(
-          children: [
-            TransferItem(Transfer(100.00, 9876)),
-            TransferItem(Transfer(70.00, 1042)),
-            TransferItem(Transfer(165.00, 0854)),
-          ],
-        ),
+        body: const TransferList(),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
@@ -48,7 +79,7 @@ class TransferList extends StatelessWidget {
     return Column(
       children: [
         TransferItem(Transfer(100.00, 9876)),
-        TransferItem(Transfer(70.00, 1042)),
+        TransferItem(Transfer(74.00, 1042)),
         TransferItem(Transfer(165.00, 0854)),
       ],
     );
