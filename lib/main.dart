@@ -1,13 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(const ByteBankApp());
+void main() => runApp(ByteBankApp());
 
 class ByteBankApp extends StatelessWidget {
-  const ByteBankApp({super.key});
+  ByteBankApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: MakeTransfer(),
       ),
@@ -16,19 +18,23 @@ class ByteBankApp extends StatelessWidget {
 }
 
 class MakeTransfer extends StatelessWidget {
-  const MakeTransfer({super.key});
+  MakeTransfer({super.key});
+
+  final TextEditingController _controllerAccountField = TextEditingController();
+  final TextEditingController _controllerValueField = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Realizar nova transferência'),
+          title: Text('Realizar nova transferência'),
         ),
-        body: const Column(
+        body: Column(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(24.0),
               child: TextField(
+                controller: _controllerValueField,
                 style: TextStyle(fontSize: 16.0),
                 decoration: InputDecoration(
                     labelText: 'Número da conta', hintText: '0000'),
@@ -38,6 +44,7 @@ class MakeTransfer extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(24.0),
               child: TextField(
+                controller: _controllerAccountField,
                 style: TextStyle(fontSize: 16.0),
                 decoration: InputDecoration(
                     labelText: 'Valor da transferência',
@@ -46,24 +53,31 @@ class MakeTransfer extends StatelessWidget {
                 keyboardType: TextInputType.numberWithOptions(),
               ),
             ),
-            ElevatedButton(onPressed: null, child: Text("Confirmar"))
+            ElevatedButton(
+              child: Text("Confirmar"),
+              onPressed: () {
+                debugPrint("Confirmado!");
+                debugPrint(_controllerAccountField.text);
+                debugPrint(_controllerValueField.text);
+              },
+            )
           ],
         ));
   }
 }
 
 class TransferDashboard extends StatelessWidget {
-  const TransferDashboard({super.key});
+  TransferDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Transferências'),
+          title: Text('Transferências'),
         ),
-        body: const TransferList(),
+        body: TransferList(),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          child: Icon(Icons.add),
           onPressed: () {
             return;
           },
@@ -72,7 +86,7 @@ class TransferDashboard extends StatelessWidget {
 }
 
 class TransferList extends StatelessWidget {
-  const TransferList({super.key});
+  TransferList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +103,13 @@ class TransferList extends StatelessWidget {
 class TransferItem extends StatelessWidget {
   final Transfer transfer;
 
-  const TransferItem(this.transfer, {super.key});
+  TransferItem(this.transfer, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: const Icon(Icons.monetization_on),
+      leading: Icon(Icons.monetization_on),
       title: Text(transfer.value.toString()),
       subtitle: Text('Conta: ${transfer.accountNumber.toString()}'),
     ));
