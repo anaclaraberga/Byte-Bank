@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(ByteBankApp());
 
 class ByteBankApp extends StatelessWidget {
-  ByteBankApp({super.key});
+  const ByteBankApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +53,21 @@ class MakeTransfer extends StatelessWidget {
                 keyboardType: TextInputType.numberWithOptions(),
               ),
             ),
-            ElevatedButton(
-              child: Text("Confirmar"),
+            FilledButton(
               onPressed: () {
                 debugPrint("Confirmado!");
                 debugPrint(_controllerAccountField.text);
                 debugPrint(_controllerValueField.text);
               },
+              style: ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(
+                      Color.fromRGBO(8, 154, 124, 0.612))),
+              child: Container(
+                height: 50,
+                width: 200,
+                alignment: Alignment.center,
+                child: Text("This is test button"),
+              ),
             )
           ],
         ));
@@ -67,7 +75,7 @@ class MakeTransfer extends StatelessWidget {
 }
 
 class TransferDashboard extends StatelessWidget {
-  TransferDashboard({super.key});
+  const TransferDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +94,7 @@ class TransferDashboard extends StatelessWidget {
 }
 
 class TransferList extends StatelessWidget {
-  TransferList({super.key});
+  const TransferList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +111,7 @@ class TransferList extends StatelessWidget {
 class TransferItem extends StatelessWidget {
   final Transfer transfer;
 
-  TransferItem(this.transfer, {super.key});
+  const TransferItem(this.transfer, {super.key});
 
   @override
   Widget build(BuildContext context) {
