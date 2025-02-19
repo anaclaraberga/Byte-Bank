@@ -56,8 +56,11 @@ class MakeTransfer extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 debugPrint("Confirmado!");
-                debugPrint(_controllerAccountField.text);
-                debugPrint(_controllerValueField.text);
+                final int accountNumber =
+                    int.parse(_controllerAccountField.text);
+                final double value = double.parse(_controllerValueField.text);
+
+                Transfer(value, accountNumber);
               },
               style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(
@@ -66,7 +69,7 @@ class MakeTransfer extends StatelessWidget {
                 height: 50,
                 width: 200,
                 alignment: Alignment.center,
-                child: Text("This is test button"),
+                child: Text("Enviar"),
               ),
             )
           ],
@@ -82,6 +85,7 @@ class TransferDashboard extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Transferências'),
+          shape: BeveledRectangleBorder(),
         ),
         body: TransferList(),
         floatingActionButton: FloatingActionButton(
